@@ -17,9 +17,9 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN wget https://github.com/w3shaman/diabetes-detection/archive/main.zip \
-    && unzip diabetes-detection-main.zip \
-    && mv diabetes-detection-main/.[!.]* . \
-    && rmdir diabetes-detection-main \
+    && unzip main.zip \
+    && mv main/.[!.]* . \
+    && rmdir main \
     && apk del \
         .builddeps
 
