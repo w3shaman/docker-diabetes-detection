@@ -20,9 +20,10 @@ RUN wget https://github.com/w3shaman/diabetes-detection/archive/main.zip \
     && unzip main.zip \
     && cp -r diabetes-detection-main/* . \
     && rm -fr diabetes-detection-main \
-    && rm main.zip \
-    && apk del \
-        .builddeps
+    && rm main.zip
+
+RUN apk del \
+    .builddeps
 
 RUN apk --no-cache add \
     tk \
