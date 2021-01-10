@@ -25,7 +25,8 @@ RUN wget https://github.com/w3shaman/diabetes-detection/archive/main.zip \
         .builddeps
 
 RUN apk --no-cache add \
-    tk
+    tk \
+    openblas-dev
 
 EXPOSE 5000
 
