@@ -18,12 +18,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN wget https://github.com/w3shaman/diabetes-detection/archive/main.zip \
     && unzip main.zip \
-    && mv diabetes-detection-main/.[!.]* . \
-    && rmdir diabetes-detection-main \
+    && cp -r diabetes-detection-main/* . \
+    && rm -fr diabetes-detection-main \
+    && rm main.zip \
     && apk del \
         .builddeps
 
+RUN apk --no-cache add \
+    tk
+
 EXPOSE 5000
-VOLUME ["/usr/src/app/models"]
 
 ENTRYPOINT [ "python", "diabetes_early_detection.py" ]
