@@ -6,19 +6,19 @@ https://github.com/w3shaman/diabetes-detection
 
 ## Running in CLI Mode
 
-``
+```
 docker run \
     -it \
     --rm \
     -v /home/user/app/diabetes-detection:/usr/src/app \
     --name diabetes_early_detection \
     w3shaman/diabetes-detection:latest
-``
+```
 
 
 ## Running in REST API Mode
 
-``
+```
 docker run \
     -d \
     -v /home/user/app/diabetes-detection:/usr/src/app \
@@ -26,12 +26,12 @@ docker run \
     --name diabetes_early_detection \
     w3shaman/diabetes-detection:latest \
         --mode restapi
-``
+```
 
 
 ## Running in Web Application Mode
 
-``
+```
 docker run \
     -d \
     -v /home/user/app/diabetes-detection:/usr/src/app \
@@ -39,7 +39,7 @@ docker run \
     --name diabetes_early_detection \
     w3shaman/diabetes-detection:latest \
         --mode web
-``
+```
 
 
 ## Save and Load Training Model
