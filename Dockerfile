@@ -27,7 +27,7 @@ RUN wget https://github.com/w3shaman/diabetes-detection/archive/7c1900d530808594
 
 RUN set -ex \
     \
-    && apt-mark auto '.*' > /dev/null; \
+    && apt-mark auto '.*' > /dev/null \
     && apt-mark manual $savedAptMark \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get update && apt-get install -y --no-install-recommends \
