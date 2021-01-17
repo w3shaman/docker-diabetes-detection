@@ -1,14 +1,15 @@
-FROM python:3.9.1-alpine
+FROM python:3.9.1-slim-buster
 
 WORKDIR /usr/src/app
 
-RUN set -x \
-    && apk update \
-    && apk --no-cache add --virtual .builddeps \
-        build-base \
-        freetype-dev \
+RUN set -ex \
+    \
+    && savedAptMark="$(apt-mark showmanual)" \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        libfreetype6-dev \
         gfortran \
-        openblas-dev \
+        libopenblas-dev \
         pkgconf \
         python3-dev \
         libffi-dev \
@@ -23,12 +24,15 @@ RUN wget https://github.com/w3shaman/diabetes-detection/archive/7c1900d530808594
     && rm -fr diabetes-detection-7c1900d530808594df0643386b9b46efba4af8e0 \
     && rm 7c1900d530808594df0643386b9b46efba4af8e0.zip
 
-RUN apk del \
-    .builddeps
-
-RUN apk --no-cache add \
-    tk \
-    openblas-dev
+RUN set -ex \
+    \
+    && apt-mark auto '.*' > /dev/null; \
+    && apt-mark manual $savedAptMark \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        libopenblas-dev \
+        tk \
+    && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5000
 
