@@ -31,7 +31,6 @@ RUN set -ex \
 RUN set -ex \
     \
     && apt-get update && apt-get install -y --no-install-recommends \
-        libopenblas-dev \
         tk \
     && rm -rf /var/lib/apt/lists/*
 
