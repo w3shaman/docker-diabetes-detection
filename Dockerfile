@@ -8,13 +8,6 @@ RUN set -ex \
     \
     && savedAptMark="$(apt-mark showmanual)" \
     && apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        libfreetype6-dev \
-        gfortran \
-        libopenblas-dev \
-        pkgconf \
-        python3-dev \
-        libffi-dev \
         unzip \
         wget \
     && pip install --no-cache-dir -r requirements.txt \
