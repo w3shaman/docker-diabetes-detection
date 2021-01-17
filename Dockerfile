@@ -13,6 +13,7 @@ RUN set -ex \
         pkgconf \
         python3-dev \
         libffi-dev \
+        unzip \
         wget
 
 COPY requirements.txt ./
