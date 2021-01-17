@@ -12,18 +12,16 @@ RUN set -x \
         pkgconf \
         python3-dev \
         libffi-dev \
-        make \
-        musl-dev \
         wget
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN wget https://github.com/w3shaman/diabetes-detection/archive/950cec36971c181fca7a7dec4454afcbc62b713a.zip \
-    && unzip 950cec36971c181fca7a7dec4454afcbc62b713a.zip \
-    && cp -r diabetes-detection-950cec36971c181fca7a7dec4454afcbc62b713a/* . \
-    && rm -fr diabetes-detection-950cec36971c181fca7a7dec4454afcbc62b713a \
-    && rm 950cec36971c181fca7a7dec4454afcbc62b713a.zip
+RUN wget https://github.com/w3shaman/diabetes-detection/archive/7c1900d530808594df0643386b9b46efba4af8e0.zip \
+    && unzip 7c1900d530808594df0643386b9b46efba4af8e0.zip \
+    && cp -r diabetes-detection-7c1900d530808594df0643386b9b46efba4af8e0/* . \
+    && rm -fr diabetes-detection-7c1900d530808594df0643386b9b46efba4af8e0 \
+    && rm 7c1900d530808594df0643386b9b46efba4af8e0.zip
 
 RUN apk del \
     .builddeps

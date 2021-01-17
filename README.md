@@ -3,6 +3,8 @@ This is the docker image for the following application:
 
 https://github.com/w3shaman/diabetes-detection
 
+## Disclaimer
+This application is for learning purpose only. The prediction result may not meet your expectation.
 
 ## Running in CLI Mode
 
@@ -10,7 +12,6 @@ https://github.com/w3shaman/diabetes-detection
 docker run \
     -it \
     --rm \
-    -v /home/user/app/diabetes-detection:/usr/src/app \
     --name diabetes_early_detection \
     w3shaman/diabetes-detection:latest
 ```
@@ -21,7 +22,6 @@ docker run \
 ```
 docker run \
     -d \
-    -v /home/user/app/diabetes-detection:/usr/src/app \
     -p 5000:5000 \
     --name diabetes_early_detection \
     w3shaman/diabetes-detection:latest \
@@ -34,7 +34,6 @@ docker run \
 ```
 docker run \
     -d \
-    -v /home/user/app/diabetes-detection:/usr/src/app \
     -p 5000:5000 \
     --name diabetes_early_detection \
     w3shaman/diabetes-detection:latest \
@@ -44,19 +43,43 @@ docker run \
 
 ## Save and Load Training Model
 
-Firstly, please be sure the path of the local application is attached to **/usr/src/app**.
+We can also save then load the training model later so the application doesn't have to do the training process on every start.
 
-For saving the generated training model, add the following parameter.
-
-``
---generate-pickle models/diabetes_early_detection.pkl
-``
-
-For loading the generated training model, add the following parameter.
+Firstly, please make sure we have the source code of the application and the path is attached to **/usr/src/app**. The easiest way of getting the source code is by cloning it from GitHub.
 
 ``
---load-pickle models/diabetes_early_detection.pkl
+git clone https://github.com/w3shaman/diabetes-detection.git
 ``
+
+For example, assume the source code is located at **/home/user/app**. Then, for saving the training model as **models/diabetes_early_detection.pkl**, we can use the following command to start the container.
+
+```
+docker run \
+    -d \
+    -v /home/user/app/diabetes-detection:/usr/src/app \
+    -p 5000:5000 \
+    --name diabetes_early_detection \
+    w3shaman/diabetes-detection:latest \
+        --generate-pickle models/diabetes_early_detection.pkl \
+        --mode restapi
+```
+
+> Please take a look at the arguments **-v** and **--generate-pickle**.
+
+For loading the generated training model, we can use the following command instead of the above when starting the container.
+
+```
+docker run \
+    -d \
+    -v /home/user/app/diabetes-detection:/usr/src/app \
+    -p 5000:5000 \
+    --name diabetes_early_detection \
+    w3shaman/diabetes-detection:latest \
+        --load-pickle models/diabetes_early_detection.pkl \
+        --mode restapi
+```
+
+> Please take a look at the arguments **-v** and **--load-pickle**.
 
 ## Dataset source
 The dataset for generating the machine learning model is taken from the following URL:
