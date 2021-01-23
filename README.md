@@ -16,6 +16,20 @@ docker run \
     w3shaman/diabetes-detection:latest
 ```
 
+## Running in GUI Mode
+
+```
+docker run \
+    -it \
+    --rm \
+    -h "$(hostname)" \
+    -e "DISPLAY" \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v $HOME/.Xauthority:/root/.Xauthority:ro \
+    --name diabetes_early_detection w3shaman/diabetes-detection:latest \
+        --mode gui
+```
+
 
 ## Running in REST API Mode
 
